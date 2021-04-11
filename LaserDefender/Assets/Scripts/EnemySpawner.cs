@@ -6,22 +6,51 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField] List<WaveConfig> waveConfigs;
-    int startingWave = 0;
+    [SerializeField] int startingWave = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        var currentWave = waveConfigs[startingWave];
-        StartCoroutine(SpawnAllEnemiesInWaves(currentWave));
+        StartCoroutine(SpawnAllWaves());
+    }
+
+    private IEnumerator SpawnAllWaves()
+    {
+        for (int waveIndex = startingWave; waveIndex < waveConfigs.Count; waveIndex++)
+        {
+            var currentWave = waveConfigs[waveIndex];
+            yield return StartCoroutine(SpawnAllEnemiesInWaves(currentWave));
+        }
     }
 
     private IEnumerator SpawnAllEnemiesInWaves (WaveConfig waveConfig)
     {
         for ( int enemyCount = 0; enemyCount < waveConfig.GetNumberEnemies(); enemyCount++)
         {
-            Instantiate(waveConfig.GetEnemyPrefab(), waveConfig.GetWaypoints()[0].transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(waveConfig.GetTimeBtwSpawns());
+            var newEnemy = Instantiate(waveConfig.GetEnemyPrefab(), waveConfig.GetWaypoints()[0].transform.position, Quaternion.identity);
+            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
+            yield return new WaitForSeconds(GetNextTimeBtwSpawns(waveConfig));
         }
     }
 
+    private float GetNextTimeBtwSpawns(WaveConfig waveConfig)
+    {
+        float timeBtwSpawns = waveConfig.GetTimeBtwSpawns();
+        float spawnRandomFactor = waveConfig.GetSpawnRandomFactor();
+        if (spawnRandomFactor < 0)
+        {
+            spawnRandomFactor = 0;
+            Debug.Log("Negative spawnRandomFactor");
+        }
+        else
+        {
+            if (spawnRandomFactor >= timeBtwSpawns *0.9f)
+            {
+                spawnRandomFactor = 0;
+                Debug.Log("Too large spawnRandomFactor");
+            }
+        }
+        float nextTimeBtwSpawns = timeBtwSpawns + Random.Range(-spawnRandomFactor, +spawnRandomFactor);
+        return nextTimeBtwSpawns;
+    }
 }
