@@ -103,3 +103,4 @@ MonoBehaviour:
   laserPrefab: {fileID: 8010716449402659652, guid: 38adfd27984a3094ba9c4540507e9c41, type: 3}
   xVelLaser: 0
   yVelLaser: 20
+  laserFiringPeriod: 0.05
