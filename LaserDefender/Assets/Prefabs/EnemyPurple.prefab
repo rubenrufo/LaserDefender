@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3263308407642477638}
   - component: {fileID: 7110691787436417077}
   - component: {fileID: -3975300416821298058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,8 +114,8 @@ MonoBehaviour:
   minTimeBtwShots: 0.2
   maxTimeBtwShots: 3
   projectile: {fileID: 8010716449402659652, guid: 145d14fa8c4fead458518c2d95a6cedf, type: 3}
-  xVelLaser: 10
-  yVelLaserRand: 0
+  xVelLaserRand: 0
+  yVelLaser: 10
 --- !u!58 &-3975300416821298058
 CircleCollider2D:
   m_ObjectHideFlags: 0
