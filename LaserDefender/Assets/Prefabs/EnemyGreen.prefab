@@ -116,6 +116,8 @@ MonoBehaviour:
   projectile: {fileID: 8010716449402659652, guid: 145d14fa8c4fead458518c2d95a6cedf, type: 3}
   xVelLaserRand: 5
   yVelLaser: 10
+  deathVFX: {fileID: 549455790196292769, guid: d59ce58f24837fe4a8f0180483778b84, type: 3}
+  durationExplosion: 1
 --- !u!58 &8660077323845931699
 CircleCollider2D:
   m_ObjectHideFlags: 0

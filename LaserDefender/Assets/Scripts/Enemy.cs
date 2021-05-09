@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float yVelLaser = 10f;
     float xVelLaser;
     Quaternion laserRotation;
+    [SerializeField] GameObject deathVFX;
+    [SerializeField] float durationExplosion = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +61,14 @@ public class Enemy : MonoBehaviour
         damageDealer.Hit();
         if (health <= 0)
         {
-            Destroy(gameObject);
+            EnemyDies();
         }
+    }
+
+    private void EnemyDies()
+    {
+        Destroy(gameObject);
+        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+        Destroy(explosion, durationExplosion);
     }
 }
