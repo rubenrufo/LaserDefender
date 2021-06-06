@@ -27,6 +27,15 @@ public class Player : MonoBehaviour
     [SerializeField] float yVelLaser = 10f;
     [SerializeField] float laserFiringPeriod = 0.3f;
     Coroutine fireCoroutine;
+    [SerializeField] AudioClip shootSFX;
+    [SerializeField] [Range(0, 1)] float shootSFXVolume = 0.75f;
+
+    [Header("Death Explosion")]
+    [SerializeField] GameObject deathVFX;
+    [SerializeField] float durationExplosion = 1f;
+    Quaternion explosionRotation;
+    [SerializeField] AudioClip deathSFX;
+    [SerializeField] [Range(0, 1)] float deathSFXVolume = 0.75f;
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +65,17 @@ public class Player : MonoBehaviour
         damageDealer.Hit();
         if (health <= 0)
         {
-            Destroy(gameObject);
+            PlayerDies();
         }
+    }
+
+    private void PlayerDies()
+    {
+        Destroy(gameObject);
+        explosionRotation.SetFromToRotation(new Vector3(0, 1, 0), new Vector3(0, 0, 1));
+        GameObject explosion = Instantiate(deathVFX, transform.position, explosionRotation);
+        Destroy(explosion, durationExplosion);
+        AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
     }
 
     private void Fire()
@@ -78,6 +96,7 @@ public class Player : MonoBehaviour
         {
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(xVelLaser, yVelLaser);
+            AudioSource.PlayClipAtPoint(shootSFX, Camera.main.transform.position, shootSFXVolume);
             yield return new WaitForSeconds(laserFiringPeriod);
         }
     }

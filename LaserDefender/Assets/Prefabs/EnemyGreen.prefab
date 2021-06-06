@@ -109,15 +109,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9a65053cf564e47b647db24bf2eb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
   shotCounter: 0
   minTimeBtwShots: 0.2
   maxTimeBtwShots: 3
   projectile: {fileID: 8010716449402659652, guid: 145d14fa8c4fead458518c2d95a6cedf, type: 3}
   xVelLaserRand: 5
   yVelLaser: 10
-  deathVFX: {fileID: 549455790196292769, guid: d59ce58f24837fe4a8f0180483778b84, type: 3}
+  shootSFX: {fileID: 8300000, guid: d3c1e4c4056bc0d4e860eb7ac26c7939, type: 3}
+  shootSFXVolume: 0.06
+  health: 500
+  deathVFX: {fileID: 549455790196292769, guid: ce645374514aa2c41909cbab25b95731, type: 3}
   durationExplosion: 1
+  deathSFX: {fileID: 8300000, guid: 5a2a75bb04c0d614b86730c037e50cde, type: 3}
+  deathSFXVolume: 0.15
 --- !u!58 &8660077323845931699
 CircleCollider2D:
   m_ObjectHideFlags: 0
