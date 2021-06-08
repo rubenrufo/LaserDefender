@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 5135496953188634000}
   - component: {fileID: 5135496953188634001}
   - component: {fileID: 3263308407642477638}
-  - component: {fileID: -8623554033892612788}
-  - component: {fileID: 8660077323845931699}
-  - component: {fileID: 956733660569264477}
-  - component: {fileID: 5806279595995329417}
+  - component: {fileID: 7110691787436417077}
+  - component: {fileID: -3975300416821298058}
+  - component: {fileID: 4606806189381646681}
+  - component: {fileID: 8002112434011991428}
   m_Layer: 7
-  m_Name: EnemyGreen
+  m_Name: EnemyBigGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bd27e516d04fe194d867e12c2ffde047, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d20490e7abaa00468ad80f1c03b5951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1b4ed24108e5644a193cb929d499e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8623554033892612788
+--- !u!114 &7110691787436417077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,21 +111,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9a65053cf564e47b647db24bf2eb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotCounter: 0
-  minTimeBtwShots: 0.2
-  maxTimeBtwShots: 3
-  projectile: {fileID: 8010716449402659652, guid: 145d14fa8c4fead458518c2d95a6cedf, type: 3}
-  xVelLaserRand: 5
-  yVelLaser: 10
-  shootSFX: {fileID: 8300000, guid: d3c1e4c4056bc0d4e860eb7ac26c7939, type: 3}
+  minTimeBtwShots: 0.8
+  maxTimeBtwShots: 2
+  projectile: {fileID: 8010716449402659652, guid: 4ef625d501a591d43b45227ac634e3e1, type: 3}
+  xVelLaserRand: 0
+  yVelLaser: 2
+  shootSFX: {fileID: 8300000, guid: 45d33ac5264c6cb45aad8fa0bedad6eb, type: 3}
   shootSFXVolume: 0.1
-  health: 400
+  health: 2000
   deathVFX: {fileID: 549455790196292769, guid: ce645374514aa2c41909cbab25b95731, type: 3}
   durationExplosion: 1
   deathSFX: {fileID: 8300000, guid: 5a2a75bb04c0d614b86730c037e50cde, type: 3}
-  deathSFXVolume: 0.15
-  enemyScore: 250
---- !u!58 &8660077323845931699
+  deathSFXVolume: 0.14
+  enemyScore: 500
+--- !u!58 &-3975300416821298058
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,10 +137,10 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02422741, y: 0.06051755}
+  m_Offset: {x: 0.050541878, y: 0.027966022}
   serializedVersion: 2
-  m_Radius: 0.21721935
---- !u!50 &956733660569264477
+  m_Radius: 0.98683286
+--- !u!50 &4606806189381646681
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -162,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5806279595995329417
+--- !u!114 &8002112434011991428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

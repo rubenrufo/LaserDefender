@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     [Header("Enemy Shooting")]
-    [SerializeField] float shotCounter;
+    float shotCounter;
     [SerializeField] float minTimeBtwShots = 0.2f;
     [SerializeField] float maxTimeBtwShots = 3f;
     [SerializeField] GameObject projectile;

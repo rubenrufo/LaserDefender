@@ -132,6 +132,10 @@ public class Player : MonoBehaviour
         return transform.position;
     }
 
+    public float GetPlayerHealth()
+    {
+        return health;
+    }
 
 
 }
