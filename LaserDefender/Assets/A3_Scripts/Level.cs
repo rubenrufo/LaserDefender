@@ -23,7 +23,12 @@ public class Level : MonoBehaviour
 
     public void LoadGameOver()
     {
-        StartCoroutine(LoadGameOverWithDelay()); 
+        StartCoroutine(LoadGameOverWithDelay());
+    }
+
+    public void LoadOptionsMenu()
+    {
+        SceneManager.LoadScene("OptionsMenu");   // Not the best way to do it   
     }
 
     public void QuitGame()

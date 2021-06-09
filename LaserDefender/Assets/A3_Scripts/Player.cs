@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     float xMax;
     float yMin;
     float yMax;
+    float xMinCam;
+    float xMaxCam;
+    float yMinCam;
+    float yMaxCam;
 
     [Header("Health")]
     [SerializeField] float health = 500f;
@@ -41,13 +45,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetUpMoveBoundaries();
+        Debug.Log(new Vector2(xMin, xMax));
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        //Move();      // WASD
+        MouseMove();   // Mouse
         Fire();
     }
 
@@ -81,11 +87,11 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire2"))     // Fire1 for keyboard, Fire2 for mouse
         {
             fireCoroutine = StartCoroutine(FireContinuously());
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire2"))       // Fire1 for keyboard, Fire2 for mouse
         {
             StopCoroutine(fireCoroutine);
         }
@@ -102,7 +108,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Move()
+    private void Move()  // Funció original de moviment per teclat
     {
         var deltaX = Input.GetAxis("Horizontal")* Time.deltaTime;
         var deltaY = Input.GetAxis("Vertical")* Time.deltaTime;
@@ -111,19 +117,33 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(newXPos, newYPos);
     }
 
+    private void MouseMove()
+    {
+        double mousePosInUnitsX = (xMaxCam - xMinCam) * ((Input.mousePosition.x / Screen.width) - 0.5);
+        double mousePosInUnitsY = (yMaxCam - yMinCam) * ((Input.mousePosition.y / Screen.height) - 0.5);
+        float clampedMousePIUX = Mathf.Clamp((float)mousePosInUnitsX, xMin, xMax);
+        float clampedMousePIUY = Mathf.Clamp((float)mousePosInUnitsY, yMin, yMax);
+        var targetPosition = new Vector2(clampedMousePIUX, clampedMousePIUY);
+
+        // For maximum speed movement
+        var movementThisFrame = Mathf.Max(xSpeed, ySpeed) * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
+
+        // For instantaneous movement
+        //  transform.position = targetPosition; 
+    }
+
     private void SetUpMoveBoundaries()
     {
         Camera gameCamera = Camera.main;
-        float xMinCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
-        float xMaxCam = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
-        float yMinCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
-        float yMaxCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
+        xMinCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
+        xMaxCam = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
+        yMinCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+        yMaxCam = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
         xMin = xMinCam + paddingX;
         xMax = xMaxCam - paddingX;
         yMin = yMinCam + paddingBottom;
         yMax = yMinCam + (yMaxCam - yMinCam) * paddingTopProp;
-
-
     }
 
 
