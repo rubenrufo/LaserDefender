@@ -6,7 +6,6 @@ public class OptionsState : MonoBehaviour
 {
 
     [SerializeField] bool inputKeyboard = false;
-    [SerializeField] int dummy = 10;
 
     void Awake()
     {

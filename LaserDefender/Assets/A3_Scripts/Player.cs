@@ -121,8 +121,9 @@ public class Player : MonoBehaviour
     {
         double mousePosInUnitsX = (xMaxCam - xMinCam) * ((Input.mousePosition.x / Screen.width) - 0.5);
         double mousePosInUnitsY = (yMaxCam - yMinCam) * ((Input.mousePosition.y / Screen.height) - 0.5);
+        double offsetMusePIUY = (yMaxCam - yMinCam) * 0.06;
         float clampedMousePIUX = Mathf.Clamp((float)mousePosInUnitsX, xMin, xMax);
-        float clampedMousePIUY = Mathf.Clamp((float)mousePosInUnitsY, yMin, yMax);
+        float clampedMousePIUY = Mathf.Clamp((float)mousePosInUnitsY + (float)offsetMusePIUY, yMin, yMax);
         var targetPosition = new Vector2(clampedMousePIUX, clampedMousePIUY);
 
         // For maximum speed movement
